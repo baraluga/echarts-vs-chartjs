@@ -1,0 +1,31 @@
+.features-page {
+  padding: var(--spacing-md) 0;
+}
+
+.page-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.page-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+.page-description {
+  font-size: 1rem;
+  color: #6b7280;
+  line-height: 1.6;
+  max-width: 800px;
+}
+
+@media (max-width: 640px) {
+  .page-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .page-description {
+    font-size: 0.9rem;
+  }
+}
