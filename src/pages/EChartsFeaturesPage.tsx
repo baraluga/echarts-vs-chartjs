@@ -1,6 +1,8 @@
 import { DataZoomDemo } from '../components/features/DataZoomDemo';
 import { VisualMapDemo } from '../components/features/VisualMapDemo';
 import { TimelineDemo } from '../components/features/TimelineDemo';
+import { SankeyDemo } from '../components/features/SankeyDemo';
+import { SaveAsImageDemo } from '../components/features/SaveAsImageDemo';
 import './EChartsFeaturesPage.css';
 
 export function EChartsFeaturesPage() {
@@ -28,6 +30,8 @@ export function EChartsFeaturesPage() {
         <DataZoomDemo />
         <VisualMapDemo />
         <TimelineDemo />
+        <SankeyDemo />
+        <SaveAsImageDemo />
       </div>
     </div>
   );
