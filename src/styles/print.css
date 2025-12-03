@@ -1,0 +1,148 @@
+/**
+ * Print-specific styles for the features page
+ * Only applies when printing, does not affect screen display
+ */
+
+@media print {
+  /* Hide navigation and non-essential elements */
+  header,
+  nav,
+  .header {
+    display: none !important;
+  }
+
+  /* Reset page margins for better print layout */
+  @page {
+    margin: 1.5cm;
+    size: portrait;
+  }
+
+  /* Remove unnecessary spacing */
+  body {
+    margin: 0;
+    padding: 0;
+    background: white;
+  }
+
+  /* Optimize container for print */
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  /* Page header optimization */
+  .page-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .page-header h2 {
+    font-size: 1.5rem;
+    color: black;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-description {
+    color: black;
+    font-size: 0.9rem;
+  }
+
+  /* Feature demo cards - B&W friendly */
+  .feature-demo {
+    page-break-inside: avoid;
+    page-break-after: always;
+    border: 2px solid black;
+    border-radius: 0;
+    padding: 1rem;
+    margin-bottom: 0;
+    box-shadow: none;
+    background: white;
+  }
+
+  /* Last feature shouldn't force a page break */
+  .feature-demo:last-child {
+    page-break-after: auto;
+  }
+
+  /* Feature content - single column for print */
+  .feature-content {
+    display: block;
+  }
+
+  /* Feature info section */
+  .feature-info {
+    margin-bottom: 1rem;
+  }
+
+  .feature-info h4 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-info p {
+    color: black;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  /* Feature list - B&W friendly checkmarks */
+  .feature-list {
+    margin-top: 0.5rem;
+  }
+
+  .feature-list li {
+    color: black;
+    font-size: 0.85rem;
+    padding: 0.2rem 0;
+  }
+
+  .feature-list li::before {
+    content: '✓';
+    color: black;
+    font-weight: bold;
+  }
+
+  /* Chart optimization for print */
+  .feature-chart {
+    width: 100%;
+    height: 500px !important;
+    min-height: 500px !important;
+    page-break-inside: avoid;
+    border: 1px solid #ccc;
+  }
+
+  /* Hide interactive elements that don't work in print */
+  button,
+  .fps-meter,
+  .library-toggle {
+    display: none !important;
+  }
+
+  /* Ensure charts render properly */
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Remove shadows and decorative elements */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Optimize text for B&W printing */
+  a,
+  a:visited {
+    color: black;
+    text-decoration: underline;
+  }
+
+  /* Force background printing for charts */
+  .feature-chart,
+  canvas {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
