@@ -130,6 +130,19 @@ requestAnimationFrame(() => {
 - Extra Large (1M): < 3s render time (with sampling)
 - FPS: > 30 FPS (mobile), > 60 FPS (desktop)
 
+## Print Functionality
+
+The ECharts Features page includes print-optimized styles:
+- Print the page using browser's print function (Cmd/Ctrl + P)
+- Automatically applies print-specific styling:
+  - Hides navigation/header
+  - Black & white friendly (optimized colors and contrast)
+  - Page breaks between each feature demo
+  - Expanded chart sizes for better readability
+  - Single-column layout
+- Print styles are defined in `src/styles/print.css` using `@media print`
+- Does not affect normal screen display
+
 ## Notes
 
 - Vite configuration includes code splitting for chart libraries (echarts, chartjs, react-vendor chunks)
