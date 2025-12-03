@@ -1,0 +1,22 @@
+.chart-renderer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.chart-container {
+  width: 100%;
+  height: var(--chart-height-mobile);
+}
+
+@media (min-width: 641px) {
+  .chart-container {
+    height: var(--chart-height-tablet);
+  }
+}
+
+@media (min-width: 1025px) {
+  .chart-container {
+    height: var(--chart-height-desktop);
+  }
+}
