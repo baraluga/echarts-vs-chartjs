@@ -45,21 +45,32 @@ export function ChartJsRenderer({ data, chartType, datasetSize }: ChartJsRendere
   const { fps, startTracking, stopTracking } = useFPSCounter();
 
   // Prepare chart data
-  const chartData = {
+  // Prepare chart data based on type
+  const lineChartData = {
     datasets: [
       {
-        label: chartType === 'line' ? 'Line Data' : 'Bar Data',
+        label: 'Line Data',
         data: data.map((d) => ({ x: d.x, y: d.y })),
         borderColor: 'rgb(59, 130, 246)',
-        backgroundColor: chartType === 'line' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(59, 130, 246, 0.7)',
-        fill: chartType === 'line',
+        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+        fill: true,
       },
     ],
   };
 
-  const options = chartType === 'line'
-    ? getChartJsLineConfig(data, datasetSize)
-    : getChartJsBarConfig(data, datasetSize);
+  const barChartData = {
+    datasets: [
+      {
+        label: 'Bar Data',
+        data: data.map((d) => ({ x: d.x, y: d.y })),
+        borderColor: 'rgb(59, 130, 246)',
+        backgroundColor: 'rgba(59, 130, 246, 0.7)',
+      },
+    ],
+  };
+
+  const lineOptions = getChartJsLineConfig(data, datasetSize);
+  const barOptions = getChartJsBarConfig(data, datasetSize);
 
   // Set up interaction listeners for FPS tracking
   useEffect(() => {
@@ -103,9 +114,9 @@ export function ChartJsRenderer({ data, chartType, datasetSize }: ChartJsRendere
         <FPSMeter fps={fps} />
         <div className="chart-container" style={{ touchAction: 'none' }}>
           {chartType === 'line' ? (
-            <Line data={chartData} options={options} />
+            <Line data={lineChartData} options={lineOptions} />
           ) : (
-            <Bar data={chartData} options={options} />
+            <Bar data={barChartData} options={barOptions} />
           )}
         </div>
       </div>
