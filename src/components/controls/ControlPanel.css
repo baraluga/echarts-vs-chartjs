@@ -1,0 +1,36 @@
+.control-panel {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.control-panel-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-color);
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (max-width: 640px) {
+  .control-panel {
+    padding: var(--spacing-md);
+  }
+
+  .control-panel-title {
+    font-size: 1rem;
+  }
+
+  .controls-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+}
