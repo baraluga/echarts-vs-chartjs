@@ -7,6 +7,14 @@ export function EChartsFeaturesPage() {
   return (
     <div className="container">
       <div className="features-page">
+        <div className="print-banner">
+          <div className="print-banner-icon">🖨️</div>
+          <div className="print-banner-content">
+            <strong>Print-Optimized Page</strong>
+            <p>This page has been specially formatted for printing. Press <kbd>Ctrl+P</kbd> (or <kbd>Cmd+P</kbd> on Mac) to print with optimized layout, B&W-friendly colors, and clean page breaks!</p>
+          </div>
+        </div>
+
         <div className="page-header">
           <h2>ECharts Exclusive Features</h2>
           <p className="page-description">

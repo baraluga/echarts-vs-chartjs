@@ -2,6 +2,49 @@
   padding: var(--spacing-md) 0;
 }
 
+.print-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: var(--spacing-lg);
+  border-radius: 8px;
+  margin-bottom: var(--spacing-xl);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.print-banner-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.print-banner-content {
+  flex: 1;
+}
+
+.print-banner-content strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.print-banner-content p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+.print-banner-content kbd {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
 .page-header {
   margin-bottom: var(--spacing-xl);
 }
@@ -21,6 +64,24 @@
 }
 
 @media (max-width: 640px) {
+  .print-banner {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+  }
+
+  .print-banner-icon {
+    font-size: 1.5rem;
+  }
+
+  .print-banner-content strong {
+    font-size: 1rem;
+  }
+
+  .print-banner-content p {
+    font-size: 0.85rem;
+  }
+
   .page-header h2 {
     font-size: 1.5rem;
   }

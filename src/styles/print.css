@@ -7,7 +7,8 @@
   /* Hide navigation and non-essential elements */
   header,
   nav,
-  .header {
+  .header,
+  .print-banner {
     display: none !important;
   }
 
