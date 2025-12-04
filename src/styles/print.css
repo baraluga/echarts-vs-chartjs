@@ -1,10 +1,28 @@
 /**
  * Print-specific styles for the features page
- * Only applies when printing, does not affect screen display
+ * Creates a stunning, colorful handout experience
+ * Only applies when printing - does not affect screen display
  */
 
+/* ============================================
+   SCREEN STYLES - Hide print-only elements
+   ============================================ */
+
+.print-only {
+  display: none !important;
+}
+
+/* ============================================
+   PRINT MEDIA QUERY - The magic happens here
+   ============================================ */
+
 @media print {
-  /* Hide navigation and non-essential elements */
+  /* Show print-only elements */
+  .print-only {
+    display: block !important;
+  }
+
+  /* Hide screen-only elements */
   header,
   nav,
   .header,
@@ -12,138 +30,603 @@
     display: none !important;
   }
 
-  /* Reset page margins for better print layout */
+  /* Page setup */
   @page {
-    margin: 1.5cm;
-    size: portrait;
+    margin: 0.75in;
+    size: letter portrait;
   }
 
-  /* Remove unnecessary spacing */
+  @page :first {
+    margin-top: 0;
+  }
+
+  /* Reset base styles */
   body {
     margin: 0;
     padding: 0;
     background: white;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #1a1a2e;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
-  /* Optimize container for print */
   .container {
     max-width: 100%;
     padding: 0;
   }
 
-  /* Page header optimization */
+  .features-page {
+    padding: 0;
+  }
+
+  /* ============================================
+     COVER PAGE
+     ============================================ */
+
+  .print-cover {
+    page-break-after: always;
+    min-height: 9in;
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    margin: -0.75in;
+    padding: 1in;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+  }
+
+  .print-cover-decoration {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    overflow: hidden;
+    opacity: 0.1;
+  }
+
+  .print-cover-pattern {
+    width: 100%;
+    height: 100%;
+    background: 
+      repeating-linear-gradient(45deg, white 0, white 2px, transparent 2px, transparent 20px),
+      repeating-linear-gradient(-45deg, white 0, white 2px, transparent 2px, transparent 20px);
+  }
+
+  .print-cover-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .print-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .print-logo-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .print-logo span {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .print-cover-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    line-height: 1.1;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .print-cover-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.95;
+    margin: 0 0 2.5rem 0;
+    max-width: 500px;
+    font-style: italic;
+  }
+
+  .print-cover-meta {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.95rem;
+  }
+
+  .print-cover-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+  }
+
+  .print-cover-footer {
+    position: absolute;
+    bottom: 1in;
+    left: 1in;
+    right: 1in;
+    padding-top: 1rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+
+  .print-cover-footer p {
+    margin: 0;
+  }
+
+  /* ============================================
+     EXECUTIVE SUMMARY
+     ============================================ */
+
+  .print-summary {
+    page-break-after: always;
+    padding: 1rem 0;
+  }
+
+  .print-summary-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 3px solid #667eea;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .print-summary-icon {
+    font-size: 1.5rem;
+  }
+
+  .print-summary-intro {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #374151;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    border-left: 4px solid #667eea;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .print-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .print-summary-card {
+    padding: 1rem;
+    border-radius: 12px;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+
+  .print-summary-card:nth-child(1) {
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    border: 2px solid #0ea5e9;
+  }
+
+  .print-summary-card:nth-child(2) {
+    background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+    border: 2px solid #a855f7;
+  }
+
+  .print-summary-card:nth-child(3) {
+    background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+    border: 2px solid #f97316;
+  }
+
+  .print-summary-card:nth-child(4) {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    border: 2px solid #3b82f6;
+  }
+
+  .print-summary-card:nth-child(5) {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+    border: 2px solid #22c55e;
+  }
+
+  .print-summary-card-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .print-summary-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: #1a1a2e;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .print-summary-card p {
+    font-size: 0.85rem;
+    margin: 0;
+    color: #4b5563;
+    line-height: 1.4;
+  }
+
+  .print-summary-note {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid #f59e0b;
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #92400e;
+  }
+
+  /* ============================================
+     PAGE HEADER (Feature list header)
+     ============================================ */
+
   .page-header {
     margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+    border-radius: 12px;
+    color: white;
+    page-break-after: avoid;
   }
 
   .page-header h2 {
     font-size: 1.5rem;
-    color: black;
-    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.5rem 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
   }
 
   .page-description {
-    color: black;
+    color: rgba(255, 255, 255, 0.85);
     font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.5;
   }
 
-  /* Feature demo cards - B&W friendly */
+  /* ============================================
+     FEATURE ANNOTATIONS (print-only context)
+     ============================================ */
+
+  .print-annotation {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    page-break-inside: avoid;
+    page-break-after: avoid;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .print-annotation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+  }
+
+  .print-annotation-teal {
+    background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+    border: 1px solid #14b8a6;
+  }
+  .print-annotation-teal::before {
+    background: linear-gradient(180deg, #14b8a6, #0d9488);
+  }
+
+  .print-annotation-purple {
+    background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+    border: 1px solid #a855f7;
+  }
+  .print-annotation-purple::before {
+    background: linear-gradient(180deg, #a855f7, #9333ea);
+  }
+
+  .print-annotation-orange {
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border: 1px solid #f97316;
+  }
+  .print-annotation-orange::before {
+    background: linear-gradient(180deg, #f97316, #ea580c);
+  }
+
+  .print-annotation-blue {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #3b82f6;
+  }
+  .print-annotation-blue::before {
+    background: linear-gradient(180deg, #3b82f6, #2563eb);
+  }
+
+  .print-annotation-green {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 1px solid #22c55e;
+  }
+  .print-annotation-green::before {
+    background: linear-gradient(180deg, #22c55e, #16a34a);
+  }
+
+  .print-annotation-badge {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .print-annotation-content strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #1a1a2e;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .print-annotation-content p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #374151;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .print-annotation-stats {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .print-annotation-stats span {
+    background: rgba(0, 0, 0, 0.08);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* ============================================
+     FEATURE DEMO CARDS
+     ============================================ */
+
   .feature-demo {
     page-break-inside: avoid;
     page-break-after: always;
-    border: 2px solid black;
-    border-radius: 0;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
     padding: 1rem;
     margin-bottom: 0;
     box-shadow: none;
     background: white;
   }
 
-  /* Last feature shouldn't force a page break */
-  .feature-demo:last-child {
+  .feature-demo:last-of-type {
     page-break-after: auto;
   }
 
-  /* Feature content - single column for print */
   .feature-content {
     display: block;
   }
 
-  /* Feature info section */
   .feature-info {
     margin-bottom: 1rem;
   }
 
   .feature-info h4 {
     font-size: 1.1rem;
-    font-weight: bold;
-    color: black;
+    font-weight: 700;
+    color: #1a1a2e;
     margin-bottom: 0.5rem;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
   }
 
   .feature-info p {
-    color: black;
+    color: #4b5563;
     font-size: 0.85rem;
-    line-height: 1.4;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
   }
 
-  /* Feature list - B&W friendly checkmarks */
   .feature-list {
-    margin-top: 0.5rem;
+    columns: 2;
+    column-gap: 2rem;
   }
 
   .feature-list li {
-    color: black;
-    font-size: 0.85rem;
-    padding: 0.2rem 0;
+    color: #374151;
+    font-size: 0.8rem;
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    break-inside: avoid;
   }
 
   .feature-list li::before {
     content: '✓';
-    color: black;
+    color: #22c55e;
+    font-weight: 700;
+  }
+
+  .feature-chart {
+    width: 100%;
+    height: 400px !important;
+    min-height: 400px !important;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    page-break-inside: avoid;
+  }
+
+  /* ============================================
+     FOOTER NOTES SECTION
+     ============================================ */
+
+  .print-footer-notes {
+    page-break-before: always;
+    padding-top: 0;
+  }
+
+  .print-footer-divider {
+    height: 4px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+
+  .print-footer-notes h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 1.5rem 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .print-footer-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .print-footer-column {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .print-footer-column:nth-child(1) {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+    border: 2px solid #22c55e;
+  }
+
+  .print-footer-column:nth-child(2) {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid #f59e0b;
+  }
+
+  .print-footer-column:nth-child(3) {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    border: 2px solid #3b82f6;
+  }
+
+  .print-footer-column h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 0.75rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .print-footer-column ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .print-footer-column li {
+    font-size: 0.8rem;
+    padding: 0.3rem 0;
+    color: #374151;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .print-footer-column li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #6b7280;
     font-weight: bold;
   }
 
-  /* Chart optimization for print */
-  .feature-chart {
-    width: 100%;
-    height: 500px !important;
-    min-height: 500px !important;
-    page-break-inside: avoid;
-    border: 1px solid #ccc;
+  .print-footer-qr {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 12px;
+    border: 2px dashed #94a3b8;
   }
 
-  /* Hide interactive elements that don't work in print */
+  .print-qr-placeholder {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 0.75rem;
+    background: white;
+    border: 2px solid #1a1a2e;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .print-qr-pattern {
+    width: 80%;
+    height: 80%;
+    background: 
+      linear-gradient(90deg, #1a1a2e 25%, transparent 25%, transparent 75%, #1a1a2e 75%),
+      linear-gradient(#1a1a2e 25%, transparent 25%, transparent 75%, #1a1a2e 75%),
+      linear-gradient(90deg, transparent 50%, #1a1a2e 50%),
+      linear-gradient(transparent 50%, #1a1a2e 50%);
+    background-size: 20% 20%, 20% 20%, 10% 10%, 10% 10%;
+  }
+
+  .print-footer-qr p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #64748b;
+    font-style: italic;
+  }
+
+  /* ============================================
+     UTILITY STYLES
+     ============================================ */
+
+  /* Hide interactive elements */
   button,
   .fps-meter,
   .library-toggle {
     display: none !important;
   }
 
-  /* Ensure charts render properly */
-  canvas {
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* Remove shadows and decorative elements */
-  * {
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-
-  /* Optimize text for B&W printing */
-  a,
-  a:visited {
-    color: black;
-    text-decoration: underline;
-  }
-
-  /* Force background printing for charts */
-  .feature-chart,
-  canvas {
+  /* Ensure charts render with colors */
+  canvas,
+  .feature-chart {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
     color-adjust: exact;
+  }
+
+  /* Links styling */
+  a,
+  a:visited {
+    color: #3b82f6;
+    text-decoration: underline;
+  }
+
+  /* Remove unnecessary visual effects */
+  * {
+    text-shadow: none !important;
   }
 }
